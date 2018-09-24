@@ -3,7 +3,7 @@ from colors import *
 from sys import platform
 
 def clear_screen():
-    """A function tha clears the terminal screen"""
+    """Clear the terminal screen."""
     if platform == "win32":
         clear_screen_command = 'cls'
     else:
@@ -11,7 +11,7 @@ def clear_screen():
     return os.system(clear_screen_command)
 
 def show_title():
-    """A function that prints title to the screen"""
+    """Print title to the screen"""
     clear_screen()
     
     print("\t*************************************************")
@@ -19,10 +19,7 @@ def show_title():
     print("\t*************************************************")
 
 def get_user_reply():
-    """
-    A function do display actions available for the user 
-    and get his reply
-    """
+    """Display actions available for the user and get reply."""
     print(CVIOLET + "\n\t Options:" + CEND)
     print("\t ________")
     print(CVIOLET + "\t Enter [t] to show all your tasks" + CEND)
@@ -33,7 +30,7 @@ def get_user_reply():
     return input("\n\t What would you like to do next? ")
 
 def show_tasks(tasks_list):
-    """A function that prints the tasks to the screen"""
+    """Print the tasks to the screen."""
     print(CBLUE + "\n\t Here are your scheduled tasks for today: " + CEND)
     print("\t ________________________________________ ")
     if tasks_list:
@@ -45,14 +42,14 @@ def show_tasks(tasks_list):
         print(CRED + "\t You don't have any tasks yet. Print 'add' to add a new task!" + CEND)
 
 def strike_text(text):
-    """A function to put strikethough the finished tasks"""
+    """Put strike though the finished tasks."""
     striked = ''
     for c in text:
         striked = striked + '\u0336' + c + '\u0336'
     return striked
 
 def show_finished_tasks(finished_list):
-    """A finished that shows completed tasks during the current session"""
+    """Show tasks completed during the current session."""
     if finished_list:
         print(CBLUE + "\n\t Today you completed a lot! Keep it up!" + CEND)
         count = 0 
@@ -61,7 +58,7 @@ def show_finished_tasks(finished_list):
             print(CGREY + f" \t{count}. {strike_text(task)}" + CEND)
 
 def add_task(tasks_list):
-    """A function that adds new task to the list of tasks"""
+    """Adds new task to the list of tasks."""
     new_task = input("\t Enter a new task: ")
     
     if new_task and new_task not in tasks_list:
@@ -73,7 +70,7 @@ def add_task(tasks_list):
             "\t and that the task is not already in the list!" + CEND)
     
 def remove_task(tasks_list):
-    """A function that removes a task specified by user"""
+    """Removes a task specified by user."""
     show_tasks(tasks_list)
     task_number = input("\n\t Enter a number of the task you want to remove: ")
     try:
@@ -89,7 +86,7 @@ def remove_task(tasks_list):
         print(CRED + "\n\t Please enter a number." + CEND)
     
 def load_tasks_from_file():
-    """A function that loads data from a file"""
+    """Load data from a file."""
     loaded_tasks = []
     try:
         with open('tasks.txt', 'r') as file:
@@ -100,7 +97,7 @@ def load_tasks_from_file():
     return loaded_tasks
     
 def save_tasks_to_file(tasks_list):    
-    """A function that loads data from a file"""
+    """Save data from a file."""
     try:
         with open('tasks.txt', 'w') as file:
             for task in tasks_list:
