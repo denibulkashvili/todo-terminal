@@ -5,6 +5,16 @@ from colors import CEND, CGREEN, CRED
 r = redis.StrictRedis(host='localhost', port=6379, db=0, charset="utf-8", decode_responses=True)
 
 
+def check_if_redis_available():
+    """Check if there's an establish connection to redis"""
+    try:
+        r.ping()
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
 def save_tasks_to_redis(task_list):
     """Save task to redis."""
     try:
