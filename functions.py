@@ -41,13 +41,6 @@ def show_tasks(tasks_list):
     else:
         print(CRED + "\t You don't have any tasks yet. Print 'add' to add a new task!" + CEND)
 
-def strike_text(text):
-    """Put strike though the finished tasks."""
-    striked = ''
-    for c in text:
-        striked = striked + '\u0336' + c + '\u0336'
-    return striked
-
 def show_finished_tasks(finished_list):
     """Show tasks completed during the current session."""
     if finished_list:
@@ -55,7 +48,7 @@ def show_finished_tasks(finished_list):
         count = 0 
         for task in finished_list:
             count += 1
-            print(CGREY + f" \t{count}. {strike_text(task)}" + CEND)
+            print(CGREY + f" \t{count}. {(task)}" + " - Completed!" + CEND)
 
 def add_task(tasks_list):
     """Adds new task to the list of tasks."""
@@ -85,25 +78,3 @@ def remove_task(tasks_list):
     except ValueError:
         print(CRED + "\n\t Please enter a number." + CEND)
     
-def load_tasks_from_file():
-    """Load data from a file."""
-    loaded_tasks = []
-    try:
-        with open('tasks.txt', 'r') as file:
-            for line in file:
-                loaded_tasks.append(line.strip())
-    except Exception as e:
-        print(CRED + e + CEND)
-    return loaded_tasks
-    
-def save_tasks_to_file(tasks_list):    
-    """Save data from a file."""
-    try:
-        with open('tasks.txt', 'w') as file:
-            for task in tasks_list:
-                file.writelines(f"{task}\n")
-        print(CGREEN + "\n\t All unfinished tasks have been saved.",
-                        "See you next time!\n" + CEND)
-    except Exception as e:
-        print(e)
-        print(CRED + "\n\t Couldn't save your tasks! Sorry! \n" + CEND)
