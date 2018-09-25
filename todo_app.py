@@ -1,10 +1,10 @@
 import functions
-
+import redis_backend
 # ToDo App is a terminal application that allows a user
 #   to enter, view and delete tasks. It remembers previous tasks
 #   even after the terminal is closed.
 
-tasks = functions.load_tasks_from_file()
+tasks = redis_backend.load_tasks_from_redis()
 finished_tasks = []
 
 user_reply = ''
@@ -25,7 +25,7 @@ while user_reply != 'q':
         removed_task = functions.remove_task(tasks)
         finished_tasks.append(removed_task)
     elif user_reply == "q":
-        functions.save_tasks_to_file(tasks)
+        redis_backend.save_tasks_to_redis(tasks)
     else:
         print("\n\t Please select a command from the Options")
     
