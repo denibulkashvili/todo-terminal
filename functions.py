@@ -78,3 +78,25 @@ def remove_task(tasks_list):
     except ValueError:
         print(CRED + "\n\t Please enter a number." + CEND)
     
+def load_tasks_from_file():
+    """Load data from a file."""
+    loaded_tasks = []
+    try:
+        with open('tasks.txt', 'r') as file:
+            for line in file:
+                loaded_tasks.append(line.strip())
+    except Exception as e:
+        print(CRED + e + CEND)
+    return loaded_tasks
+    
+def save_tasks_to_file(tasks_list):    
+    """Save data from a file."""
+    try:
+        with open('tasks.txt', 'w') as file:
+            for task in tasks_list:
+                file.writelines(f"{task}\n")
+        print(CGREEN + "\n\t All unfinished tasks have been saved.",
+                        "See you next time!\n" + CEND)
+    except Exception as e:
+        print(e)
+        print(CRED + "\n\t Couldn't save your tasks! Sorry! \n" + CEND)
